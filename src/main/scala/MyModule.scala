@@ -5,8 +5,9 @@ object MyModule {
     if (n < 0) -n
     else n
 
-  private def formatAbs(x: Int) = {
-    s"The absolute value of %d is %d" format(x, abs(x))
+
+  private def formatResult(msg: String, x: Int, f: Int => Int) = {
+    s"The %s of %d is %d" format(msg, x, f(x))
   }
 
   private def formatFactorial(x: Int) = {
@@ -18,12 +19,12 @@ object MyModule {
   }
 
   def fib(x: Int): Int = {
-//    @tailrec
-    def go(x: Int, acc: Int): Int =
-      if (x < 2) acc + x
-      else go(x - 1, acc) + go(x - 2, acc)
+    @tailrec
+    def go(i: Int, fib: Int, last: Int): Int =
+      if (i < 2) fib
+      else go(i - 1, fib + last, fib)
 
-    go(x, 0)
+    go(x, 1, 0)
   }
 
   def factorial(x: Int): Int = {
@@ -35,9 +36,10 @@ object MyModule {
     go(x, 1)
   }
 
-  def main(args: Array[String]): Unit =
-    println(formatAbs(-42))
+  def main(args: Array[String]): Unit = {
+    println(formatResult("absolute value", -42, abs))
+    println(formatResult("factorial", 7, factorial))
+    println(formatResult("fibonacci number", 18, fib))
+  }
 
-  println(formatFactorial(7))
-  println(formatFib(11))
 }
