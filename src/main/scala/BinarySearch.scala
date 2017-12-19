@@ -20,7 +20,7 @@ object BinarySearch {
 
 
   def isSorted[A](as: Array[A], gt: (A, A) => Boolean): Boolean = {
-
+    @tailrec
     def go(x: Int): Boolean = {
       if (x == 0) true
       else
