@@ -1,0 +1,2 @@
+# fpinscala
+studing functional programming
